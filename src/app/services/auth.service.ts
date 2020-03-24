@@ -6,6 +6,7 @@ import {Injectable} from '@angular/core';
 export class AuthService {
     isAuth: boolean | string;
     userName: string;
+    userEmail: string;
 
     constructor() {
     }

@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authService.isAuth = localStorage.getItem('isAuth');
     this.authService.userName = localStorage.getItem('userName');
+    this.authService.userEmail = localStorage.getItem('userEmail');
   }
 
   login() {

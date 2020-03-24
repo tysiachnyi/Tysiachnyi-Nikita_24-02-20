@@ -34,6 +34,7 @@ export class LoginModalComponent implements OnInit {
       const formData = {...this.form.value};
       const localStorageData = JSON.parse(localStorage.getItem(formData.email));
       if (localStorageData[1] ===  formData.password) {
+        localStorage.setItem('userEmail', formData.email);
         localStorage.setItem('userName', localStorageData[0]);
         localStorage.setItem('isAuth', 'auth');
         this.authService.isAuth = localStorage.getItem('isAuth');
