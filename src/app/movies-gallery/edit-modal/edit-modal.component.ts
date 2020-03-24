@@ -25,13 +25,12 @@ export class EditModalComponent implements OnInit {
 
   submit() {
     const formData = {...this.form.value};
-    console.log(formData);
     localStorage.setItem('userName', formData.name);
+    const oldFav = JSON.parse(localStorage.getItem(this.authService.userName));
+    localStorage.removeItem(this.authService.userName);
+    localStorage.setItem(formData.name, JSON.stringify(oldFav));
     let newState = JSON.parse(localStorage.getItem(this.authService.userEmail));
     newState = newState.map((item) =>  item === this.authService.userName ? formData.name : item );
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    console.log(newState)
     localStorage.setItem(this.authService.userEmail, JSON.stringify(newState));
     this.form.reset();
     window.location.reload();

@@ -19,6 +19,7 @@ export class MoviesGalleryService {
 
   fetchMovies() {
     this.localStorageUser = JSON.parse(localStorage.getItem(this.authService.userName));
+    console.log(this.authService.userEmail);
     this.http.get<Movies[]>(
         'http://my-json-server.typicode.com/moviedb-tech/movies/list')
          .subscribe(response => {
