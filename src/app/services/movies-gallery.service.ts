@@ -11,7 +11,7 @@ export class MoviesGalleryService {
   movies: Movies[] = [];
   likedMovies: Movies[] = [];
   likedMovie;
-  localStorageData: any[] = JSON.parse(localStorage.getItem('likedMovies'));
+  // localStorageData: any[] = JSON.parse(localStorage.getItem('likedMovies'));
   localStorageUser: any[];
 
   constructor(private http: HttpClient,
@@ -19,7 +19,6 @@ export class MoviesGalleryService {
 
   fetchMovies() {
     this.localStorageUser = JSON.parse(localStorage.getItem(this.authService.userName));
-    console.log(this.localStorageUser);
     this.http.get<Movies[]>(
         'http://my-json-server.typicode.com/moviedb-tech/movies/list')
          .subscribe(response => {
@@ -41,7 +40,6 @@ export class MoviesGalleryService {
       this.likedMovie.onFav = true;
       if (!inLoad) {
         this.localStorageUser = this.likedMovies.map(item => item.id);
-        localStorage.setItem('likedMovies', JSON.stringify(this.localStorageData));
         localStorage.setItem(this.authService.userName, JSON.stringify(this.localStorageUser));
       }
     }
@@ -55,7 +53,6 @@ export class MoviesGalleryService {
       this.likedMovie = this.movies.find(el => el.id === id);
       this.likedMovie.onFav = false;
       this.localStorageUser = this.localStorageUser.filter(d => d !== id);
-      localStorage.setItem('likedMovies', JSON.stringify(this.localStorageUser));
       localStorage.setItem(this.authService.userName, JSON.stringify(this.localStorageUser));
     }
   }
